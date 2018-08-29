@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.mapper.UsersMapper">
+     <!--添加用户-->
+    <insert id="addUsers" parameterType="Users">
+        INSERT INTO smbms_user(userCode,userName,userPassword,idPicPath)
+         VALUES(#{userCode},#{userName},#{userPassword},#{idPicPath})
+    </insert>
+
+    <!--根据id查询三个用户-->
+    <select id="findUser" parameterType="string" resultType="Users">
+        SELECT id,userCode,userName,userPassword FROM smbms_user
+         WHERE id=#{id}
+    </select>
+
+    <!--修改用户-->
+    <update id="updateUsers" parameterType="Users">
+        UPDATE smbms_user
+        <set>
+            userName=#{userName},userPassword=#{userPassword}
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+</mapper>

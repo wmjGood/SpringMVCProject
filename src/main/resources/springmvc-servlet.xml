@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+">
+<!--配置处理器映射 把一个url请求指定给一个控制器处理-->
+<!--<bean name="/index.jsp" class="controller.IndexController"/>-->
+    <!--2.对包进行扫描 实现注解驱动bean的定义 同时将bean自动注入容器-->
+  <context:component-scan base-package="spring.controller"></context:component-scan>
+    <!--配置mvc标签会自动注册处理器映与处理器适配器 需要@Controller和@RequestMapping等注解支持-->
+   <mvc:annotation-driven/>
+    <!--完成视图对应-->
+    <!--配置视图解析器 指定的请求需要使用的那个视图进行请求结果的渲染-->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/"></property>
+    <property name="suffix" value=".jsp"></property>
+</bean>
+    <!--配置multipartResolver 用于文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="50000000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+     </bean>
+
+
+</beans>
